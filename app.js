@@ -11,7 +11,7 @@ app.get("/", (req, res) => {
 
                 temperature: 0.8,
 
-                token_max_length: 100,
+                token_max_length: 40,
 
                 top_p: 1,
 
