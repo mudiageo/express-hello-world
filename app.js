@@ -28,8 +28,12 @@ app.get("/", (req, res) => {
   .then(function (response) {
     console.log(response.data.text)
 res.send(response.data.text)
-  }
-
+  })
+  .catch(function (error) {
+    console.log(error);
+  })
+  
+})
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 
