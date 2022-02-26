@@ -7,7 +7,7 @@ const port = process.env.PORT || 3001;
 
 app.get("/", (req, res) => {
   axios.post('http://api.vicgalle.net:5000/generate',{
-    context: prompt,
+    context: req.query.context,
 
                 temperature: 0.8,
 
