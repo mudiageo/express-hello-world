@@ -26,7 +26,7 @@ app.get("/", (req, res) => {
                 }
 })
   .then(function (response) {
-    //console.log(response.data.text)
+    console.log(response.data.text)
 res.send(response.data.text)
   }
 
