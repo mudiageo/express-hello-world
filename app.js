@@ -8,25 +8,15 @@ const port = process.env.PORT || 3001;
 app.get("/", (req, res) => {
   res.append('Access-Control-Allow-Origin','*')
 let data = {
-    context: req.query.context,
-                temperature: 0.8,
-                token_max_length: 40,
-                top_p: 1,
-                stop_sequence: '\n',
+    context: req.query.context || prompt,
+                temperature: req.query.temperature || 0.8,
+                token_max_length: req.query.token_max_length || 40,
+                top_p: req.query.top_p || 1,
+                stop_sequence: req.query.stop_sequence || '\n',
 }
-  axios.post('http://api.vicgalle.net:5000/generate',{
-                context: req.query.context,
-                temperature: 0.8,
-                token_max_length: 40,
-                top_p: 1,
-                stop_sequence: '\n',
-},
-  {
-                headers: {
-                    'Content-Type': 'application/json',
-                    
-                }
-})
+let params = Object.entries(data).map(([key, val]) => `${key}=${encodeURIComponent(val)}`).join('&')
+
+  axios.post(`http://api.vicgalle.net:5000/generate?${params}`)
   .then(function (response) {
     console.log(response.data.text)
 res.send(response.data.text)
