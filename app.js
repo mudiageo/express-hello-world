@@ -71,11 +71,12 @@ const options = {
 
 axios.request(options).then(function (response) {
   console.log(response.data);
-res.send(response.data.text)
+//res.send(response.data.text)
 }).catch(function (error) {
   console.error(error);
 });
-res.send(prompt)})
+res.send(process.env.COHERE_AI_KEY)
+})
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 
