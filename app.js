@@ -9,11 +9,23 @@ const port = process.env.PORT || 3001;
 app.get("/",  (req, res) => {
   res.append('Access-Control-Allow-Origin','*')
 
-const headers = {
-  'Content-Type': 'application/json',
-  'Authorization': `BEARER ${process.env.COHERE_AI_KEY}`
-}
 
+const options = {
+  method: 'POST',
+  url: 'https://api.cohere.ai/medium/generate',
+  headers: {
+    Authorization: `Bearer ${process.env.COHERE_AI_KEY}`,
+    'content-type': 'application/json'
+  },
+  data: {
+    prompt: req.query.context || prompt,
+                temperature: req.query.temperature || 0.8,
+                max_tokens: req.query.token_max_length || 40,
+                p: req.query.top_p || 1,
+                stop_sequences: req.query.stop_sequence || '\n'
+
+  }
+};
 let data = {
     prompt: req.query.context || prompt,
                 temperature: req.query.temperature || 0.8,
@@ -30,7 +42,7 @@ let params = Object.entries(data).map(([key, val]) => `${key}=${encodeURICompone
 console.log(`Generate: ${generateResponse}`)
 */
  //axios.post(`http://api.vicgalle.net:5000/generate?${params}`)
- axios.post('https://api.cohere.ai/medium/generate', data, headers) .then(function (response) {
+ axios.request(options).then(function (response) {
     console.log(response)
 res.send(response.text)
   })
