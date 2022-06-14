@@ -21,6 +21,7 @@ cohere.init(process.env.COHERE_AI_KEY);
   const generateResponse = await cohere.generate("medium", data);
 let params = Object.entries(data).map(([key, val]) => `${key}=${encodeURIComponent(val)}`).join('&')
  await res.send(generateResponse.text)
+console.log(`Generate: ${generateResponse}`)
 /*  axios.post(`http://api.vicgalle.net:5000/generate?${params}`)
   .then(function (response) {
     console.log(response.data.text)
