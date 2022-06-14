@@ -52,7 +52,8 @@ res.send(response.text)
  
 })
 app.get("/test", (req, res) => {
-res.append('Access-Control-Allow-Origin','*')const options = {
+res.append('Access-Control-Allow-Origin','*')
+const options = {
   method: 'POST',
   url: 'https://api.cohere.ai/medium/generate',
   headers: {
@@ -70,6 +71,7 @@ res.append('Access-Control-Allow-Origin','*')const options = {
 
 axios.request(options).then(function (response) {
   console.log(response.data);
+res.send(response.data.text)
 }).catch(function (error) {
   console.error(error);
 });
