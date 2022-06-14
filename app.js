@@ -52,7 +52,27 @@ res.send(response.text)
  
 })
 app.get("/test", (req, res) => {
-res.append('Access-Control-Allow-Origin','*')
+res.append('Access-Control-Allow-Origin','*')const options = {
+  method: 'POST',
+  url: 'https://api.cohere.ai/medium/generate',
+  headers: {
+    Authorization: 'Bearer oSbYm1kDMoQIRGssEeVLjhE7P9WDXi71uyd0OYil',
+    'content-type': 'application/json'
+  },
+  data: {
+    prompt: 'Once upon a time in a magical land called',
+    max_tokens: 50,
+    temperature: 1,
+    k: 0,
+    p: 0.75
+  }
+};
+
+axios.request(options).then(function (response) {
+  console.log(response.data);
+}).catch(function (error) {
+  console.error(error);
+});
 res.send(prompt)})
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
