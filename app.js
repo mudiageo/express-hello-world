@@ -77,6 +77,6 @@ axios.request(options).then(function (response) {
 });
 res.send(process.env.COHERE_AI_KEY)
 })
-app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.listen(port, () => console.log(`Render Express API app listening on port ${port}!`));
 
 
