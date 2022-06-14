@@ -31,8 +31,8 @@ console.log(`Generate: ${generateResponse}`)
 */
  //axios.post(`http://api.vicgalle.net:5000/generate?${params}`)
  axios.post('https://api.cohere.ai/medium/generate', data, headers) .then(function (response) {
-    console.log(response.data.text)
-res.send(response.data.text)
+    console.log(response)
+res.send(response.text)
   })
   .catch(function (error) {
     console.log(error);
