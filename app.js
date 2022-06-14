@@ -57,7 +57,7 @@ const options = {
   method: 'POST',
   url: 'https://api.cohere.ai/medium/generate',
   headers: {
-    Authorization: 'Bearer oSbYm1kDMoQIRGssEeVLjhE7P9WDXi71uyd0OYil',
+    Authorization: `Bearer ${process.env.COHERE_AI_KEY}`,
     'content-type': 'application/json'
   },
   data: {
@@ -70,12 +70,13 @@ const options = {
 };
 
 axios.request(options).then(function (response) {
-  console.log(response.data);
+  res.send(response.data);
 //res.send(response.data.text)
 }).catch(function (error) {
+res.send(error)
   console.error(error);
 });
-res.send(process.env.COHERE_AI_KEY)
+
 })
 app.listen(port, () => console.log(`Render Express API app listening on port ${port}!`));
 
