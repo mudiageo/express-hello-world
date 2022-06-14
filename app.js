@@ -36,7 +36,7 @@ let data = {
 /*cohere.init(process.env.COHERE_AI_KEY);
 
   // Hit the `generate` endpoint on the `large` model
-  const generateResponse = await cohere.generate("medium", data);
+ // const generateResponse = await cohere.generate("medium", data);
 let params = Object.entries(data).map(([key, val]) => `${key}=${encodeURIComponent(val)}`).join('&')
  await res.send(generateResponse.text)
 console.log(`Generate: ${generateResponse}`)
@@ -51,6 +51,9 @@ res.send(response.text)
   })
  
 })
+app.get("/test", (req, res) => {
+res.append('Access-Control-Allow-Origin','*')
+res.send(prompt)})
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 
