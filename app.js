@@ -61,7 +61,7 @@ const options = {
     'content-type': 'application/json'
   },
   data: {
-    prompt: req.query.context,
+    prompt: req.query.context || prompt,
     max_tokens: 50,
     temperature: 1,
     k: 0,
