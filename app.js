@@ -67,7 +67,7 @@ const options = {
 
 axios.request(options).then(function (response) {
  // res.send(response.data);
-res.send(response.data.text)
+res.send(req.query.context+response.data.text)
 }).catch(function (error) {
 res.send(error)
   console.error(error);
