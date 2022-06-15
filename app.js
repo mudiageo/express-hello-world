@@ -57,10 +57,11 @@ const options = {
   },
   data: {
     prompt: req.query.context,
-    max_tokens: req.query.token_max_length,
-    temperature: req.query.temperature,
+    max_tokens: parseInt(req.query.token_max_length),
+    temperature: parseFloat(req.query.temperature),
     k: 0,
-    p: req.query.top_p
+    p: parseFloat(req.query.top_p),
+    stop_sequences: [req.query.stop_sequence]
     }
 };
 
