@@ -4,7 +4,6 @@ const prompt = 'My name is Albert Einstein. I am a theoretical physicist who dev
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 3001;
-//const cohere = require('cohere-ai');
 
 app.get("/test",  (req, res) => {
   res.append('Access-Control-Allow-Origin','*')
@@ -33,14 +32,10 @@ let data = {
                 p: req.query.top_p || 1,
                 stop_sequences: req.query.stop_sequence || '\n',
 }
-/*cohere.init(process.env.COHERE_AI_KEY);
 
-  // Hit the `generate` endpoint on the `large` model
- // const generateResponse = await cohere.generate("medium", data);
-let params = Object.entries(data).map(([key, val]) => `${key}=${encodeURIComponent(val)}`).join('&')
- await res.send(generateResponse.text)
-console.log(`Generate: ${generateResponse}`)
-*/
+
+  let params = Object.entries(data).map(([key, val]) => `${key}=${encodeURIComponent(val)}`).join('&')
+ 
  //axios.post(`http://api.vicgalle.net:5000/generate?${params}`)
  axios.request(options).then(function (response) {
     console.log(response)
@@ -61,11 +56,11 @@ const options = {
     'content-type': 'application/json'
   },
   data: {
-    prompt: req.query.context || prompt,
-    max_tokens: 50,
-    temperature: 1,
+    prompt: req.query.context,
+    max_tokens: req.query.token_max_length,
+    temperature: req.query.temperature,
     k: 0,
-    p: 0.75
+    p: req.query.top_p
   }
 };
 
