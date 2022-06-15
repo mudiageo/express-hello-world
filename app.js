@@ -6,7 +6,7 @@ const app = express();
 const port = process.env.PORT || 3001;
 //const cohere = require('cohere-ai');
 
-app.get("/",  (req, res) => {
+app.get("/test",  (req, res) => {
   res.append('Access-Control-Allow-Origin','*')
 
 
@@ -51,7 +51,7 @@ res.send(response.text)
   })
  
 })
-app.get("/test", (req, res) => {
+app.get("/", (req, res) => {
 res.append('Access-Control-Allow-Origin','*')
 const options = {
   method: 'POST',
@@ -62,10 +62,10 @@ const options = {
   },
   data: {
     prompt: req.query.context,
-    max_tokens: 50,
-    temperature: 1,
+    max_tokens: req.query.token_max_length,
+    temperature: req.query.temperature,
     k: 0,
-    p: 0.75
+    p: req.query.top_p
   }
 };
 
