@@ -62,10 +62,10 @@ const options = {
   },
   data: {
     prompt: req.query.context,
-    max_tokens: req.query.token_max_length,
-    temperature: req.query.temperature,
+    max_tokens: 50,
+    temperature: 1,
     k: 0,
-    p: req.query.top_p
+    p: 0.75
   }
 };
 
