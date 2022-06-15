@@ -65,14 +65,13 @@ const options = {
     max_tokens: req.query.token_max_length,
     temperature: req.query.temperature,
     k: 0,
-    p: req.query.top_p,
-    stop_sequences:[req.query.stop_sequence]
+    p: req.query.top_p
   }
 };
 
 axios.request(options).then(function (response) {
-  res.send(response.data);
-//res.send(response.data.text)
+ // res.send(response.data);
+res.send(response.data.text)
 }).catch(function (error) {
 res.send(error)
   console.error(error);
