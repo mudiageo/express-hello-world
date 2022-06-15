@@ -61,7 +61,7 @@ const options = {
     'content-type': 'application/json'
   },
   data: {
-    prompt: 'Once upon a time in a magical land called',
+    prompt: req.query.context,
     max_tokens: 50,
     temperature: 1,
     k: 0,
