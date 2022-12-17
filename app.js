@@ -4,6 +4,37 @@ const prompt = 'My name is Albert Einstein. I am a theoretical physicist who dev
 const express = require("express");
 const app = express();
 const port = process.env.PORT || 3001;
+const { Configuration, OpenAIApi } = require("openai");
+
+const configuration = new Configuration({
+  apiKey: process.env.OPENAI_API_KEY,
+});
+const openai = new OpenAIApi(configuration);
+
+
+app.get("/openai", (req, res) => {
+res.append('Access-Control-Allow-Origin','*')
+const data ={
+    prompt: req.query.context,
+    max_tokens: parseInt(req.query.token_max_length),
+    temperature: parseFloat(req.query.temperature),
+    k: 0,
+    p: parseFloat(req.query.top_p),
+    stop_sequences: [req.query.stop_sequence]
+    
+};
+const response = await openai.createCompletion({
+  model: "text-davinci-003",
+  prompt: req.query.context,
+  max_tokens: parseInt(req.query.token_max_length),
+  top_p: 1,
+  frequency_penalty: 0,
+  presence_penalty: 0.6,
+  stop: [req.query.stop_sequence],
+});
+console.log(response)
+res.send(response)
+})
 
 app.get("/test",  (req, res) => {
   res.append('Access-Control-Allow-Origin','*')
